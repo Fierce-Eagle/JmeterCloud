@@ -1,38 +1,20 @@
 package com.jmeterPractice.practice.HelpClasses;
 
-import kg.apc.jmeter.reporters.AutoStop;
-import kg.apc.jmeter.threads.UltimateThreadGroup;
-import org.apache.http.HttpRequest;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.control.gui.LoopControlPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.engine.StandardJMeterEngine;
-import org.apache.jmeter.engine.event.LoopIterationListener;
 import org.apache.jmeter.protocol.http.control.gui.HttpTestSampleGui;
-import org.apache.jmeter.protocol.http.sampler.HTTPSampleResult;
-import org.apache.jmeter.protocol.http.sampler.HTTPSampler;
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy;
-import org.apache.jmeter.protocol.http.sampler.HttpWebdav;
-import org.apache.jmeter.reporters.ResultCollector;
-import org.apache.jmeter.reporters.Summariser;
-import org.apache.jmeter.samplers.SampleListener;
 import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.save.ListenerResultWrapper;
 import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.testelement.TestPlan;
 import org.apache.jmeter.threads.ThreadGroup;
 import org.apache.jmeter.threads.gui.ThreadGroupGui;
 import org.apache.jmeter.util.JMeterUtils;
-import org.apache.jmeter.visualizers.SummaryReport;
-import org.apache.jmeter.visualizers.ViewResultsFullVisualizer;
 import org.apache.jorphan.collections.HashTree;
-
-
-import java.io.FileOutputStream;
-import java.net.URL;
 
 public class JmeterTesting
 {
@@ -40,16 +22,17 @@ public class JmeterTesting
 
     /**
      * Начало теста
-     * @throws Exception
      */
-    public void start() throws Exception
-    {
+    public void start() {
 
         //JMeter Engine
         jmeter = new StandardJMeterEngine();
 
         JMeterUtils.loadJMeterProperties("jmeter.properties"); // местоположение файла (не менять)
         JMeterUtils.initLocale();
+
+        SampleResult result = new SampleResult();
+        result.getErrorCount();
 
         // HTTP Sampler
         HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
@@ -72,12 +55,6 @@ public class JmeterTesting
         loopController.setProperty(TestElement.TEST_CLASS, LoopController.class.getName());
         loopController.setProperty(TestElement.GUI_CLASS, LoopControlPanel.class.getName());
 
-        /* по идее это listener, и с помощью него можно получить кол-во ошибок в тесте,
-        * но я пока не нашел, как его добавить, чтобы тесты запускались*/
-        SampleResult result = new SampleResult();
-        result.setURL(new URL("https://www.youtube.com/"));
-        result.sampleStart();
-
         // Thread Group
         ThreadGroup threadGroup = new ThreadGroup();
         threadGroup.setName("threadGroup");
@@ -98,21 +75,24 @@ public class JmeterTesting
         testPlanTree.add(testPlan);
         HashTree threadGroupHashTree = testPlanTree.add(testPlan, threadGroup);
         threadGroupHashTree.add(httpSampler);
-        //threadGroupHashTree.add(result); // тут ошибка
 
         // Run Test Plan
         jmeter.configure(testPlanTree);
 
-        int threadCount = 20; // число потоков
+        int threadCount = 20; // число потоков на старте
+        long startTime, finishTime, temp; // просмотр по времени
         do {
             threadGroup.setNumThreads(threadCount);
+            startTime = System.nanoTime(); // стартовое время
             jmeter.run();
+            finishTime = System.nanoTime(); // окончание теста
             threadCount += 10;
-        } while ( threadCount < 160); // временная заглушка, т.к. не нашел как отслеживать плохие запросы
+            temp = finishTime - startTime;
+        } while ( temp < 11 * Math.pow(10, 9)); /* общее время стартового прохода теста 10.5 сек.
+         еще 0.5 сек. свидетельствуют о пропущенных запросах */
 
         // снижение числа потоков и запуск Jmeter навсегда (работает)
         threadCount -= 20;
-        System.out.println("All Test!");
         loopController.setContinueForever(true);
         jmeter.run();
     }
