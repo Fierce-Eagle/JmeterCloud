@@ -31,9 +31,6 @@ public class JmeterTesting
         JMeterUtils.loadJMeterProperties("jmeter.properties"); // местоположение файла (не менять)
         JMeterUtils.initLocale();
 
-        SampleResult result = new SampleResult();
-        result.getErrorCount();
-
         // HTTP Sampler
         HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
         httpSampler.setName("httpSampler");
