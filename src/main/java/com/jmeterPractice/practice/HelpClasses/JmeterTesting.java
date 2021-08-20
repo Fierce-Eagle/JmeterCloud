@@ -17,6 +17,20 @@ import org.apache.jorphan.collections.HashTree;
 
 public class JmeterTesting
 {
+    /**
+     * Создание статического метода для вызоа одного и того же объекта всегда
+     * Так как конструктор private, то создать еще экземпляров не получиться
+     * @return
+     */
+    public static JmeterTesting getJmeterTest () {
+        return test;
+    }
+
+    /**
+     * Конструктор
+     */
+    private JmeterTesting () {}
+    private static JmeterTesting test = new JmeterTesting();
     private StandardJMeterEngine jmeter;
     private String domain = "youtube.com";
     private String protocol = "https";
