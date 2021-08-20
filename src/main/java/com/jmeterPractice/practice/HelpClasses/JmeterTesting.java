@@ -18,11 +18,30 @@ import org.apache.jorphan.collections.HashTree;
 public class JmeterTesting
 {
     private StandardJMeterEngine jmeter;
+    private String domain = "youtube.com";
+    private String protocol = "https";
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public String getProtocol() {
+        return  protocol;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
 
     /**
      * Начало теста
      */
-    public void start() {
+    public void start()
+    {
 
         //JMeter Engine
         jmeter = new StandardJMeterEngine();
@@ -33,8 +52,8 @@ public class JmeterTesting
         // HTTP Sampler
         HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
         httpSampler.setName("httpSampler");
-        httpSampler.setProtocol("https");
-        httpSampler.setDomain("youtube.com");
+        httpSampler.setProtocol(protocol);
+        httpSampler.setDomain(domain);
         httpSampler.setPath("/");
         httpSampler.setMethod("GET");
         httpSampler.setFollowRedirects(true);
@@ -89,6 +108,7 @@ public class JmeterTesting
 
         // снижение числа потоков и запуск Jmeter навсегда (работает)
         threadCount -= 20;
+        threadGroup.setNumThreads(threadCount);
         loopController.setContinueForever(true);
         jmeter.run();
     }
