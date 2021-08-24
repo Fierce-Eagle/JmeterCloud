@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     @GetMapping("/")
-    public String toDo(Model model) throws Exception {
+    public String toDo(Model model) {
         model.addAttribute("title", "Главная страница");
-        JmeterTesting test = new JmeterTesting();
+        JmeterTesting test = JmeterTesting.getJmeterTest();
         test.start();
         return "Greetings from Spring Boot!";
     }
