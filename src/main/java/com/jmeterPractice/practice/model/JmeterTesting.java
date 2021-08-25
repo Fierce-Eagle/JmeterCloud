@@ -103,8 +103,7 @@ public class JmeterTesting
     /**
      * Остановка теста
      */
-    public void stop()
-    {
+    public void stop() {
         jmeter.stopTest(true);
     }
 }
