@@ -1,4 +1,4 @@
-package com.jmeterPractice.practice.helpClasses;
+package com.jmeterpractice.practice.helpclasses;
 
 import org.junit.Test;
 

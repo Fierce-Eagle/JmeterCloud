@@ -1,6 +1,6 @@
-package com.jmeterPractice.practice.controllers;
+package com.jmeterpractice.practice.controllers;
 
-import com.jmeterPractice.practice.helpClasses.JmeterTesting;
+import com.jmeterpractice.practice.helpclasses.JmeterTesting;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
