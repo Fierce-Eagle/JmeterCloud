@@ -78,7 +78,7 @@ public class JmeterTesting
         threadGroup.setNumThreads(10);
         threadGroup.setRampUp("10");
         /*
-            Нарыть инфу о возможностях ConcurrencyThreadGroup
+            Нарыть инфу о возможностях ConcurrencyThreadGroup (еще в работе, но тесты проходит успешно)
          */
         threadGroup.setSamplerController(loopController); // добавление loopController
         threadGroup.setProperty(TestElement.TEST_CLASS, ConcurrencyThreadGroup.class.getName());
