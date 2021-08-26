@@ -1,4 +1,4 @@
-package com.jmeterpractice.practice;
+package com.jmeterPractice.practice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

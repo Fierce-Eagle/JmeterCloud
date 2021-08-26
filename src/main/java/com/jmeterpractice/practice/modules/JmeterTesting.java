@@ -1,4 +1,4 @@
-package com.jmeterpractice.practice.modules;
+package com.jmeterPractice.practice.modules;
 
 import com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup;
 import org.apache.jmeter.control.LoopController;
