@@ -1,4 +1,4 @@
-package com.jmeterPractice.practice;
+package com.jmeterpractice.practice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
