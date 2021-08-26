@@ -72,6 +72,8 @@ public class JmeterTesting {
         loopController.initialize(); // инициализация, часть прошлых настроек можно упустить (они там автоматически настраиваются)
         loopController.setProperty(TestElement.TEST_CLASS, LoopController.class.getName());
 
+        // add info about listeners
+
         // ConcurrencyThreadGroup
         ConcurrencyThreadGroup threadGroup = new ConcurrencyThreadGroup();
         threadGroup.setNumThreads(10);
