@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String toDo(Model model) {
+    public String startPage(Model model) {
         model.addAttribute("title", "Главная страница");
         return "Home";
     }

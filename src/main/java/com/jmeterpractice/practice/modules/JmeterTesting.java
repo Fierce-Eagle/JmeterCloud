@@ -9,8 +9,7 @@ import org.apache.jmeter.testelement.TestPlan;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
 
-public class JmeterTesting
-{
+public class JmeterTesting {
     /**
      * Создание статического метода для вызоа одного и того же объекта всегда
      * Так как конструктор private, то создать еще экземпляров не получиться
