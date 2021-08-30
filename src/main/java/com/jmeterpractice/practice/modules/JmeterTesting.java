@@ -4,9 +4,12 @@ import com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup;
 import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy;
+import org.apache.jmeter.reporters.ResultCollector;
+import org.apache.jmeter.reporters.Summariser;
 import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.testelement.TestPlan;
 import org.apache.jmeter.util.JMeterUtils;
+import org.apache.jmeter.visualizers.BeanShellListener;
 import org.apache.jorphan.collections.HashTree;
 
 public class JmeterTesting {
@@ -71,6 +74,11 @@ public class JmeterTesting {
         loopController.setLoops(1); // количество итераций для каждого пользователя
         loopController.initialize(); // инициализация, часть прошлых настроек можно упустить (они там автоматически настраиваются)
         loopController.setProperty(TestElement.TEST_CLASS, LoopController.class.getName());
+
+        // add info about listeners
+        //ResultCollector
+        //Summariser
+        SummariserR
 
         // ConcurrencyThreadGroup
         ConcurrencyThreadGroup threadGroup = new ConcurrencyThreadGroup();
